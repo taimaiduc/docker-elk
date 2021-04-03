@@ -1,0 +1,23 @@
+version: '3.2'
+
+services:
+  filebeat:
+    build:
+      context: extensions/filebeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./extensions/filebeat/config/filebeat-server.yml
+        target: /usr/share/filebeat/filebeat.yml
+      - type: bind
+        source: ./extensions/filebeat/logs
+        target: /var/logs
+        read_only: true
+    command: ./filebeat -e -strict.perms=false
+    ports:
+      - '9988:9988'
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch

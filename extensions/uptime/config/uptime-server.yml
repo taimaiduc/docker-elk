@@ -1,0 +1,25 @@
+# heartbeat.yml
+heartbeat.monitors:
+- type: http
+  id: calcuso.de
+  name: Service Status
+  service.name: calcuso.de
+  hosts: ["https://staging.calcuso.com/"]
+  check.response.status: [200]
+  schedule: '@every 30s'
+- type: http
+  id: quantractravinh
+  name: Service Status
+  service.name: calcuso.de
+  hosts: ["https://quantractravinh.com/"]
+  check.response.status: [200]
+  schedule: '@every 30s'
+heartbeat.scheduler:
+  limit: 10
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+  username: "elastic"
+  password: "changeme"
+setup.kibana:
+  host: "http://kibana:5601"
