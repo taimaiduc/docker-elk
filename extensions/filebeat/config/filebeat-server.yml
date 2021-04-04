@@ -1,27 +1,27 @@
 filebeat.inputs:
-- type: log
-  paths:
-    - /var/logs/nginx/*.log
-  tags: ["nginx", "json"]
-  json.keys_under_root: true
-  json.add_error_key: true
-- type: log
-  paths:
-    - /var/logs/mysql/mysql-slow.log
-  tags: ["mysql", "mysql-slow"]
-  multiline.pattern: '^\#[[:space:]]Time'
-  multiline.negate: true
-  multiline.match: after
-- type: log
-  paths:
-    - /var/logs/mysql/mysql-error.log
-  tags: ["mysql", "mysql-error"]
-- type: log
-  paths:
-    - /var/logs/php/*.log
-  tags: ["php"]
+  - type: log
+    paths:
+      - /var/logs/nginx/*.log
+    tags: [ "nginx", "json" ]
+    json.keys_under_root: true
+    json.add_error_key: true
+  - type: log
+    paths:
+      - /var/logs/mysql/mysql-slow.log
+    tags: [ "mysql", "mysql-slow" ]
+    multiline.pattern: '^\#[[:space:]]Time'
+    multiline.negate: true
+    multiline.match: after
+  - type: log
+    paths:
+      - /var/logs/mysql/mysql-error.log
+    tags: [ "mysql", "mysql-error" ]
+  - type: log
+    paths:
+      - /var/logs/php/*.log
+    tags: [ "php" ]
 output.elasticsearch:
-  hosts: ["http://elasticsearch:9200"]
+  hosts: [ "http://elasticsearch:9200" ]
   username: "elastic"
   password: "changeme"
 setup.kibana:
