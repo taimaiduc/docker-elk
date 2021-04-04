@@ -2,6 +2,7 @@ version: '3.2'
 
 services:
   metricbeat:
+    container_name: metricbeat
     build:
       context: extensions/metricbeat/
       args:

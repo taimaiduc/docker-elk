@@ -14,20 +14,14 @@ metricbeat.autodiscover:
       hints.enabled: true
 
 metricbeat.modules:
-- module: docker
+- module: mysql
   metricsets:
-    - container
-    - cpu
-    - diskio
-    - healthcheck
-    - info
-    #- image
-    - memory
-    - network
-  hosts: ['unix:///var/run/docker.sock']
-  period: 10s
+    - status
+    - galera_status
+    - performance
+  hosts: ["root:root@(172.18.0.1:3316)/"]
+  period: 30s
   enabled: true
-
 processors:
   - add_cloud_metadata: ~
 
