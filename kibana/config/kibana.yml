@@ -11,3 +11,24 @@ monitoring.ui.container.elasticsearch.enabled: true
 #
 elasticsearch.username: elastic
 elasticsearch.password: changeme
+xpack.encryptedSavedObjects:
+  encryptionKey: "5fdb0bbe54304ee6a2fd9dff25f9b508"
+
+xpack.actions.preconfigured:
+  my-slack1:
+    actionTypeId: .slack
+    name: 'Slack #xyz'
+    secrets:
+      webhookUrl: 'https://hooks.slack.com/services/abcd/efgh/ijklmnopqrstuvwxyz'
+  webhook-service:
+    actionTypeId: .webhook
+    name: 'Email service'
+    config:
+      url: 'https://email-alert-service.elastic.co'
+      method: post
+      headers:
+        header1: value1
+        header2: value2
+    secrets:
+      user: elastic
+      password: changeme
