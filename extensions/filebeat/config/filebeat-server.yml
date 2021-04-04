@@ -7,8 +7,15 @@ filebeat.inputs:
   json.add_error_key: true
 - type: log
   paths:
-    - /var/logs/mysql/*.log
-  tags: ["mysql"]
+    - /var/logs/mysql/mysql-slow.log
+  tags: ["mysql", "mysql-slow"]
+  multiline.pattern: '^\#[[:space:]]Time'
+  multiline.negate: true
+  multiline.match: after
+- type: log
+  paths:
+    - /var/logs/mysql/mysql-error.log
+  tags: ["mysql", "mysql-error"]
 - type: log
   paths:
     - /var/logs/php/*.log
