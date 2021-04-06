@@ -18,8 +18,18 @@ filebeat.inputs:
     tags: [ "mysql", "mysql-error" ]
   - type: log
     paths:
-      - /var/logs/php/*.log
-    tags: [ "php" ]
+      - /var/logs/php/www-slow.log
+    tags: [ "php", "php-slow" ]
+    multiline.pattern: '\[[0-9]{2}'
+    multiline.negate: true
+    multiline.match: after
+  - type: log
+    paths:
+      - /var/logs/php/www-error.log
+    tags: [ "php", "php-error" ]
+    multiline.pattern: '^\['
+    multiline.negate: true
+    multiline.match: after
 output.elasticsearch:
   hosts: [ "http://elasticsearch:9200" ]
   username: "elastic"
